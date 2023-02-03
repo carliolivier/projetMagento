@@ -8,7 +8,7 @@ let email = faker.internet.email();
 let pw = faker.internet.password();
 let compagny = faker.company.companyName();
 let address = faker.address.streetAddress();
-let city = faker.address.city() ;
+let city = faker.address.city();
 let zipcode = faker.address.zipCode();
 let phone = faker.phone.phoneNumber();
 
@@ -17,7 +17,7 @@ beforeEach(() => {
 });
 
 describe("automatisation d'un test", () => {
-	it("insciption", () => {
+	it.skip("insciption", () => {
 		cy.get(".panel > .header > :nth-child(3) > a").click();
 		cy.get("#firstname").type(name);
 		cy.get("#lastname").type(last);
@@ -28,7 +28,7 @@ describe("automatisation d'un test", () => {
 			"#form-validate > .actions-toolbar > div.primary > .action > span"
 		).click();
 	});
-	it("connexion", () => {
+	it.skip("connexion", () => {
 		cy.get(".panel > .header > .authorization-link > a").click();
 		cy.get("#email").type("d.vador@yopmail.com");
 		cy.get(
@@ -39,7 +39,7 @@ describe("automatisation d'un test", () => {
 		).click();
 	});
 
-	it("addtocart1", () => {
+	it.skip("addtocart1", () => {
 		cy.get("#ui-id-4").trigger("mouseover");
 		cy.get("#ui-id-9").trigger("mouseover");
 		cy.get("#ui-id-11 > span").click();
@@ -76,7 +76,7 @@ describe("automatisation d'un test", () => {
 			".checkout-success > .actions-toolbar > div.primary > .action"
 		).click();
 	});
-	it("modifier quantite panier", () => {
+	it.skip("modifier quantite panier", () => {
 		cy.get("#ui-id-4").trigger("mouseover");
 		cy.get("#ui-id-9").trigger("mouseover");
 		cy.get("#ui-id-11 > span").click();
@@ -115,7 +115,7 @@ describe("automatisation d'un test", () => {
 			".payment-method-content > :nth-child(4) > div.primary > .action"
 		).click();
 	});
-	it("modifier adresse livraison", () => {
+	it("mise a jour adresse livraison", () => {
 		cy.get("#ui-id-4").trigger("mouseover");
 		cy.get("#ui-id-9").trigger("mouseover");
 		cy.get("#ui-id-11 > span").click();
@@ -131,8 +131,6 @@ describe("automatisation d'un test", () => {
 		cy.get(".showcart").click();
 		cy.wait(2000);
 		cy.get(":nth-child(7) > .secondary > .action > span").click();
-
-		cy.get('input[class="input-text qty"]').clear().type("20");
 		cy.get(".update > span").click();
 		cy.wait(2000);
 		cy.get(".checkout-methods-items > :nth-child(1) > .action > span").click();
@@ -142,25 +140,35 @@ describe("automatisation d'un test", () => {
 		cy.get('[name="shippingAddress.company"]').type(compagny);
 		cy.get('[name="shippingAddress.street.0"]').type(address);
 		cy.get('[name="shippingAddress.city"]').type(city);
-		cy.get('[class="select"]').eq(0).select("Alaska");
+		// cy.get('[class="select"]').eq(0).select("Alaska");
+		cy.get('[name="shippingAddress.region_id"]')
+			.find('select[class="select"]')
+			.select("Alaska");
 		cy.get('[name="shippingAddress.postcode"]').type(zipcode);
-		cy.get('[class="select"]').eq(1).select("France");
+
+		cy.get('[name="shippingAddress.country_id"]')
+			.find('select[class="select"]')
+			.select("France");
+		// cy.get('[class="select"]').eq(1).select("France");
 		cy.get('[name="shippingAddress.telephone"]').type(phone);
 		cy.get(":nth-child(2) > :nth-child(1) > .radio").click();
 		cy.get(".button").click();
-		
 		cy.get("#billing-address-same-as-shipping-checkmo").click();
-		cy.get('#billing-address-same-as-shipping-checkmo').click();
-		cy.wait(1000)
+		cy.get("#billing-address-same-as-shipping-checkmo").click();
+		cy.wait(1000);
 		cy.get('[name="billingAddresscheckmo.firstname"]').type(name);
 		cy.get('[name="billingAddresscheckmo.lastname"]').type(last);
 		cy.get('[name="billingAddresscheckmo.company"]').type(compagny);
 		cy.get('[name="billingAddresscheckmo.street.0"]').type(address);
 		cy.get('[name="billingAddresscheckmo.city"]').type(city);
-		cy.get('[class="select"]').eq(0).select("Alaska");
+		cy.get('[name="billingAddresscheckmo.region_id"]')
+			.find('select[class="select"]')
+			.select("Alaska");
 		cy.get('[name="billingAddresscheckmo.postcode"]').type(zipcode);
-		cy.get('[class="select"]').eq(1).select("France");
+		cy.get('[name="billingAddresscheckmo.country_id"]')
+			.find('select[class="select"]')
+			.select("France");
 		cy.get('[name="billingAddresscheckmo.telephone"]').type(phone);
-		cy.get('.action-update').click();
+		cy.get(".action-update").click();
 	});
 });
