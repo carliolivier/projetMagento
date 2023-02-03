@@ -6,6 +6,11 @@ let name = faker.name.firstName();
 let last = faker.name.lastName();
 let email = faker.internet.email();
 let pw = faker.internet.password();
+let compagny = faker.company.companyName();
+let address = faker.address.streetAddress();
+let city = faker.address.city() ;
+let zipcode = faker.address.zipCode();
+let phone = faker.phone.phoneNumber();
 
 beforeEach(() => {
 	cy.visit("https://magento.softwaretestingboard.com/");
@@ -50,18 +55,17 @@ describe("automatisation d'un test", () => {
 		cy.get(".showcart").click();
 		cy.wait(3000);
 		cy.get("#top-cart-btn-checkout").click();
-		cy.get("#customer-email-fieldset > .required").type(
-			"darkvador@yopmail.com"
-		);
+		cy.wait(2000);
+		cy.get("#customer-email-fieldset > .required").type(email);
 		cy.get('[name="shippingAddress.firstname"]').type(name);
 		cy.get('[name="shippingAddress.lastname"]').type(last);
-		cy.get('[name="shippingAddress.company"]').type("wild");
-		cy.get('[name="shippingAddress.street.0"]').type("1 rue de lille");
-		cy.get('[name="shippingAddress.city"]').type("Lille");
+		cy.get('[name="shippingAddress.company"]').type(compagny);
+		cy.get('[name="shippingAddress.street.0"]').type(address);
+		cy.get('[name="shippingAddress.city"]').type(city);
 		cy.get('[class="select"]').eq(0).select("Alaska");
-		cy.get('[name="shippingAddress.postcode"]').type("59000");
+		cy.get('[name="shippingAddress.postcode"]').type(zipcode);
 		cy.get('[class="select"]').eq(1).select("France");
-		cy.get('[name="shippingAddress.telephone"]').type("0320123456");
+		cy.get('[name="shippingAddress.telephone"]').type(phone);
 		cy.get(":nth-child(2) > :nth-child(1) > .radio").click();
 		cy.get(".button").click();
 		cy.get("#billing-address-same-as-shipping-checkmo").click();
@@ -93,18 +97,17 @@ describe("automatisation d'un test", () => {
 		cy.get(".update > span").click();
 		cy.wait(1000);
 		cy.get(".checkout-methods-items > :nth-child(1) > .action > span").click();
-		cy.get("#customer-email-fieldset > .required").type(
-			"darkvador@yopmail.com"
-		);
+		cy.wait(1000);
+		cy.get("#customer-email-fieldset > .required").type(email);
 		cy.get('[name="shippingAddress.firstname"]').type(name);
 		cy.get('[name="shippingAddress.lastname"]').type(last);
-		cy.get('[name="shippingAddress.company"]').type("wild");
-		cy.get('[name="shippingAddress.street.0"]').type("1 rue de lille");
-		cy.get('[name="shippingAddress.city"]').type("Lille");
+		cy.get('[name="shippingAddress.company"]').type(compagny);
+		cy.get('[name="shippingAddress.street.0"]').type(address);
+		cy.get('[name="shippingAddress.city"]').type(city);
 		cy.get('[class="select"]').eq(0).select("Alaska");
-		cy.get('[name="shippingAddress.postcode"]').type("59000");
+		cy.get('[name="shippingAddress.postcode"]').type(zipcode);
 		cy.get('[class="select"]').eq(1).select("France");
-		cy.get('[name="shippingAddress.telephone"]').type("0320123456");
+		cy.get('[name="shippingAddress.telephone"]').type(phone);
 		cy.get(":nth-child(2) > :nth-child(1) > .radio").click();
 		cy.get(".button").click();
 		cy.get("#billing-address-same-as-shipping-checkmo").click();
@@ -133,18 +136,16 @@ describe("automatisation d'un test", () => {
 		cy.get(".update > span").click();
 		cy.wait(2000);
 		cy.get(".checkout-methods-items > :nth-child(1) > .action > span").click();
-		cy.get("#customer-email-fieldset > .required").type(
-			"darkvador@yopmail.com"
-		);
+		cy.get("#customer-email-fieldset > .required").type(email);
 		cy.get('[name="shippingAddress.firstname"]').type(name);
 		cy.get('[name="shippingAddress.lastname"]').type(last);
-		cy.get('[name="shippingAddress.company"]').type("wild");
-		cy.get('[name="shippingAddress.street.0"]').type("1 rue de lille");
-		cy.get('[name="shippingAddress.city"]').type("Lille");
+		cy.get('[name="shippingAddress.company"]').type(compagny);
+		cy.get('[name="shippingAddress.street.0"]').type(address);
+		cy.get('[name="shippingAddress.city"]').type(city);
 		cy.get('[class="select"]').eq(0).select("Alaska");
-		cy.get('[name="shippingAddress.postcode"]').type("59000");
+		cy.get('[name="shippingAddress.postcode"]').type(zipcode);
 		cy.get('[class="select"]').eq(1).select("France");
-		cy.get('[name="shippingAddress.telephone"]').type("0320123456");
+		cy.get('[name="shippingAddress.telephone"]').type(phone);
 		cy.get(":nth-child(2) > :nth-child(1) > .radio").click();
 		cy.get(".button").click();
 		
@@ -153,12 +154,13 @@ describe("automatisation d'un test", () => {
 		cy.wait(1000)
 		cy.get('[name="billingAddresscheckmo.firstname"]').type(name);
 		cy.get('[name="billingAddresscheckmo.lastname"]').type(last);
-		cy.get('[name="billingAddresscheckmo.company"]').type("wild");
-		cy.get('[name="billingAddresscheckmo.street.0"]').type("1 rue de lille");
-		cy.get('[name="billingAddresscheckmo.city"]').type("Lille");
-		cy.get('[class="select"]').eq(3).select("Alaska");
-		cy.get('[name="billingAddresscheckmo.postcode"]').type("59000");
-		cy.get('[class="select"]').eq(4).select("France");
-		cy.get('[name="billingAddresscheckmo.telephone"]').type("0320123456");
+		cy.get('[name="billingAddresscheckmo.company"]').type(compagny);
+		cy.get('[name="billingAddresscheckmo.street.0"]').type(address);
+		cy.get('[name="billingAddresscheckmo.city"]').type(city);
+		cy.get('[class="select"]').eq(0).select("Alaska");
+		cy.get('[name="billingAddresscheckmo.postcode"]').type(zipcode);
+		cy.get('[class="select"]').eq(1).select("France");
+		cy.get('[name="billingAddresscheckmo.telephone"]').type(phone);
+		cy.get('.action-update').click();
 	});
 });
